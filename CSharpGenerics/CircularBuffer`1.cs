@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CSharpGenerics
+﻿namespace CSharpGenerics
 {
     public class CircularBuffer<T>
     {
