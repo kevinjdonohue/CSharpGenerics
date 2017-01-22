@@ -7,7 +7,7 @@ namespace CircularBufferApp
     {
         static void Main(string[] args)
         {
-            CircularBuffer<double> buffer = new CircularBuffer<double>(3);
+            IBuffer<double> buffer = new CircularBuffer<double>(3);
 
             ProcessUserInput(buffer);
 
@@ -16,7 +16,7 @@ namespace CircularBufferApp
             Console.ReadLine();
         }
 
-        private static void ProcessBuffer(CircularBuffer<double> buffer)
+        private static void ProcessBuffer(IBuffer<double> buffer)
         {
             double sum = 0.0;
 
@@ -30,7 +30,7 @@ namespace CircularBufferApp
             Console.WriteLine(sum);
         }
 
-        private static void ProcessUserInput(CircularBuffer<double> buffer)
+        private static void ProcessUserInput(IBuffer<double> buffer)
         {
             while (true)
             {

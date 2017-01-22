@@ -1,6 +1,6 @@
 ﻿namespace CSharpGenerics
 {
-    public class CircularBuffer<T>
+    public class CircularBuffer<T> : IBuffer<T>
     {
         private readonly T[] _buffer;
         private int _start;

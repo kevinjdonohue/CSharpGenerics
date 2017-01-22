@@ -8,7 +8,7 @@ namespace CSharpGenericsTests
 {
     public class DoubleCircularBufferTests : IDisposable
     {
-        private CircularBuffer<double> _sut;
+        private IBuffer<double> _sut;
         private Fixture _fixture;
 
         public DoubleCircularBufferTests()
@@ -27,13 +27,12 @@ namespace CSharpGenericsTests
         public void GivenADefaultBuffer_WhenCapacityIsCalled_ThenElevenIsReturned()
         {
             //arrange
-            CircularBuffer<double> sut = new CircularBuffer<double>();
 
             //act
-            int capacity = sut.Capacity;
+            int capacity = _sut.Capacity;
 
             //assert
-            capacity.Should().Be(11, "a newly constructed default buffer is given a capacity of the desired capacity plus one");
+            capacity.Should().Be(4, "a newly constructed default buffer is given a capacity of the desired capacity plus one");
         }
 
         [Fact]
