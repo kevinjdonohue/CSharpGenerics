@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace CSharpGenerics
 {
@@ -18,6 +19,20 @@ namespace CSharpGenerics
         public virtual T Read()
         {
             return Queue.Dequeue();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            //return Queue.GetEnumerator();
+            foreach (T item in Queue)
+            {
+                yield return item;
+            }
         }
     }
 }
