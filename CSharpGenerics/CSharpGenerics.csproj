@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buffer.cs" />
+    <Compile Include="BufferFactory.cs" />
+    <Compile Include="BufferType.cs" />
     <Compile Include="CircularBuffer`1.cs" />
     <Compile Include="IBuffer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,7 +7,8 @@ namespace CircularBufferApp
     {
         static void Main(string[] args)
         {
-            IBuffer<double> buffer = new CircularBuffer<double>(3);
+            BufferFactory bufferFactory = new BufferFactory();
+            IBuffer<double> buffer = bufferFactory.GetInstance<double>(BufferType.CircularBuffer);
 
             ProcessUserInput(buffer);
 

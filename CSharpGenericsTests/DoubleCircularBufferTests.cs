@@ -8,12 +8,13 @@ namespace CSharpGenericsTests
 {
     public class DoubleCircularBufferTests : IDisposable
     {
+        private readonly BufferFactory _bufferFactory = new BufferFactory();
         private IBuffer<double> _sut;
         private Fixture _fixture;
 
         public DoubleCircularBufferTests()
         {
-            _sut = new CircularBuffer<double>(3);
+            _sut = _bufferFactory.GetInstance<double>(BufferType.CircularBuffer);
             _fixture = new Fixture();
         }
 
@@ -24,7 +25,7 @@ namespace CSharpGenericsTests
         }
 
         [Fact]
-        public void GivenADefaultBuffer_WhenCapacityIsCalled_ThenElevenIsReturned()
+        public void GivenADefaultBuffer_WhenCapacityIsCalled_ThenFourIsReturned()
         {
             //arrange
 
@@ -32,23 +33,11 @@ namespace CSharpGenericsTests
             int capacity = _sut.Capacity;
 
             //assert
-            capacity.Should().Be(4, "a newly constructed default buffer is given a capacity of the desired capacity plus one");
+            capacity.Should().Be(3, "a newly constructed default buffer is given a capacity of the desired capacity");
         }
 
         [Fact]
-        public void GivenAThreeElementBuffer_WhenCapacityIsCalled_ThenFourIsReturned()
-        {
-            //arrange
-
-            //act
-            int capacity = _sut.Capacity;   
-
-            //assert
-            capacity.Should().Be(4, "a newly constructed buffer is given a capacity of the desired capacity plus one");
-        }
-
-        [Fact]
-        public void GivenAThreeElementBuffer_WithNoElementsAdded_WhenIsEmptyIsCalled_ThenTrueIsReturned()
+        public void GivenADefaultBuffer_WithNoElementsAdded_WhenIsEmptyIsCalled_ThenTrueIsReturned()
         {
             //arrange
 
@@ -60,7 +49,7 @@ namespace CSharpGenericsTests
         }
 
         [Fact]
-        public void GivenAThreeElementBuffer_WithOneElementAdded_WhenIsEmptyIsCalled_ThenFalseIsReturned()
+        public void GivenADefaultBuffer_WithOneElementAdded_WhenIsEmptyIsCalled_ThenFalseIsReturned()
         {
             //arrange
             _sut.Write(_fixture.Create<double>());
@@ -74,21 +63,22 @@ namespace CSharpGenericsTests
         }
 
         [Fact]
-        public void GivenAThreeElementBuffer_WithTwoElementsAdded_WhenIsFullIsCalled_ThenFalseIsReturned()
+        public void GivenADefaultBuffer_WithTwoElementsAdded_WhenIsFullIsCalled_ThenFalseIsReturned()
         {
             //arrange
             _sut.Write(_fixture.Create<double>());
             _sut.Write(_fixture.Create<double>());
 
             //act
-            bool isFull = _sut.IsFull;
+            CircularBuffer<double> circularBuffer = _sut as CircularBuffer<double>;
+            bool isFull = circularBuffer.IsFull;
 
             //assert
             isFull.Should().BeFalse("a buffer with a capacity of three and two elements written to it should not be full");
         }
 
         [Fact]
-        public void GivenAThreeElementBuffer_WithThreeElementsAdded_WhenIsFullIsCalled_ThenTrueIsReturned()
+        public void GivenADefaultBuffer_WithThreeElementsAdded_WhenIsFullIsCalled_ThenTrueIsReturned()
         {
             //arrange
             _sut.Write(_fixture.Create<double>());
@@ -96,14 +86,15 @@ namespace CSharpGenericsTests
             _sut.Write(_fixture.Create<double>());
 
             //act
-            bool isFull = _sut.IsFull;
+            CircularBuffer<double> circularBuffer = _sut as CircularBuffer<double>;
+            bool isFull = circularBuffer.IsFull;
 
             //assert
             isFull.Should().BeTrue("a buffer with a capacity of three and three elements written to it should be full");
         }
 
         [Fact]
-        public void GivenAThreeElementBuffer_WithTwoElementsAdded_WhenReadIsCalled_ThenValuesAreReturnedFirstInFirstOut()
+        public void GivenADefaultBuffer_WithTwoElementsAdded_WhenReadIsCalled_ThenValuesAreReturnedFirstInFirstOut()
         {
             //arrange
             double expectedValue1 = _fixture.Create<double>();
@@ -121,7 +112,7 @@ namespace CSharpGenericsTests
         }
 
         [Fact]
-        public void GivenAThreeElementBuffer_WithFiveElementsAdded_WhenReadIsCalled_ThenValuesAreOverwrittenAndReturnedFirstInFirstOut()
+        public void GivenADefaultBuffer_WithFiveElementsAdded_WhenReadIsCalled_ThenValuesAreOverwrittenAndReturnedFirstInFirstOut()
         {
             //arrange
             double expectedValue1 = _fixture.Create<double>();

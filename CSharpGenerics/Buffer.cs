@@ -2,24 +2,22 @@
 
 namespace CSharpGenerics
 {
-    class Buffer<T> : IBuffer<T>
+    public class Buffer<T> : IBuffer<T>
     {
-        readonly Queue<T> _queue = new Queue<T>();
+        protected readonly Queue<T> Queue = new Queue<T>();
 
-        public bool IsEmpty => _queue.Count == 0;
+        public virtual bool IsEmpty => Queue.Count == 0;
 
-        public bool IsFull { get; }
+        public virtual int Capacity => Queue.Count;
 
-        public int Capacity => _queue.Count;
-
-        public void Write(T value)
+        public virtual void Write(T value)
         {
-            _queue.Enqueue(value);
+            Queue.Enqueue(value);
         }
 
-        public T Read()
+        public virtual T Read()
         {
-            return _queue.Dequeue();
+            return Queue.Dequeue();
         }
     }
 }
