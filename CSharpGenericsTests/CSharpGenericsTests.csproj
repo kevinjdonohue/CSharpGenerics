@@ -78,6 +78,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CircularBufferApp\CircularBufferApp.csproj">
+      <Project>{5EBAB3CC-38F6-4FCA-875B-DCEB4B7F67C1}</Project>
+      <Name>CircularBufferApp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSharpGenerics\CSharpGenerics.csproj">
       <Project>{FE5F96DA-7085-4698-BC29-548E532212B1}</Project>
       <Name>CSharpGenerics</Name>
